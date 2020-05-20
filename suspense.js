@@ -12,14 +12,12 @@ const verificaTeoria = (teoria) => {
         erros.push(3)
     }
 
-    if () {
-
-    }
-    
-    if (!erros) {
+    if (erros.length === 0) {
         return 0
+    } else  if (erros.length === 1 && erros[0] === 1) {
+        return 1 
     } else {
-        return erros[parseInt((Math.random()*(0-2) + (erros.length-1)).toFixed(0))]
+        return parseInt((Math.random()*(0-2) + (resultado.length-1)).toFixed(0));
     }
 }
 

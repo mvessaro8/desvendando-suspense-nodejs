@@ -8,9 +8,9 @@ test('Verifica se o valor informado é igual ao valor do res', () => {
 });
 
 test('Verifica se a teoria está correta', () => {
-    expect(verificaTeoria([2,3,4])).toEqual(0);
+    expect(verificaTeoria([2,3,4])).toStrictEqual(0);
 });
 
-test('Verificar se o input é uma possível resposta', () => {
+test('Verificar se o suspeito é incorreto', () => {
     expect(verificaTeoria([3,3,4])).toStrictEqual(1);
 });
