@@ -1,48 +1,35 @@
-const suspeitos = [
-    {
-        id: 1,
-        nome: 'Charles B. Abbage'
-    },
-    {
-        id: 2,
-        nome: 'Donald Duck Knuth'
-    },
-    {
-        id: 3,
-        nome: 'Ada L. Ovelace'
-    },
-    {
-        id: 4,
-        nome: 'Alan T. Uring'
-    },
-    {
-        id: 5,
-        nome: 'Ivar J. Acobson'
-    },
-    {
-        id: 6,
-        nome: 'Ras Mus Ler Dorf'
-    }
-];
-
-let getSuspeitoById = (id) => {
-    return suspeitos.filter(sus => sus.id === id)[0];
-}
-
 const evidencias = [2,3,4];
 
-let validarTeoria = (arr) => {
-    if (arr[0] !== evidencias[0]) {
-        return 1;
-    } else if (arr[1] !== evidencias[1]) {
-        return 2;
-    } else if (arr[2] !== evidencias[2]) {
-        return 3;
-    } else {
+let validarTeoria = (teoria) => {
+    const assassinoCorreto = assassinoValido(teoria[0]);
+    const localCorreto = localValido(teoria[1]);
+    const armaCorreta = armaValida(teoria[2]);
+
+    const caso = [assassinoCorreto, localCorreto, armaCorreta];
+
+    const casoSolucionado = caso.every(item => !!item);
+    if (casoSolucionado) {
         return 0;
     }
+
+    const casoIncompleto = caso
+        .map((item, i) => ({ key: i + 1, value: item }))
+        .filter(item => !item.value)
+        .map(item => item.key);
+
+    return casoIncompleto[Math.floor(Math.random() * casoIncompleto.length)];
 }
 
-module.exports.suspeitos = suspeitos;
-module.exports.getSuspeitoById = getSuspeitoById;
+let assassinoValido = (assassino) => {
+    return assassino == evidencias[0];
+};
+
+let localValido = (local) => {
+    return local == evidencias[1];
+};
+
+let armaValida = (arma) => {
+    return arma == evidencias[2];
+};
+
 module.exports.validarTeoria = validarTeoria;
