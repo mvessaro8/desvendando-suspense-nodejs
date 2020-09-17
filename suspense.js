@@ -1,34 +1,29 @@
 const evidencias = [2,3,4];
 
 let validarTeoria = (teoria) => {
-    const assassinoCorreto = assassinoValido(teoria[0]);
-    const localCorreto = localValido(teoria[1]);
-    const armaCorreta = armaValida(teoria[2]);
+    const assassinoCorreto = validarAssassino(teoria[0]);
+    const localCorreto = validarLocal(teoria[1]);
+    const armaCorreta = validarArma(teoria[2]);
 
     const caso = [assassinoCorreto, localCorreto, armaCorreta];
 
-    const casoSolucionado = caso.every(item => !!item);
-    if (casoSolucionado) {
-        return 0;
-    }
-
-    const casoIncompleto = caso
+    const solucao = caso
         .map((item, i) => ({ key: i + 1, value: item }))
         .filter(item => !item.value)
         .map(item => item.key);
 
-    return casoIncompleto[Math.floor(Math.random() * casoIncompleto.length)];
+    return solucao.length > 0 ? solucao[Math.floor(Math.random() * solucao.length)] : 0;
 }
 
-let assassinoValido = (assassino) => {
+let validarAssassino = (assassino) => {
     return assassino == evidencias[0];
 };
 
-let localValido = (local) => {
+let validarLocal = (local) => {
     return local == evidencias[1];
 };
 
-let armaValida = (arma) => {
+let validarArma = (arma) => {
     return arma == evidencias[2];
 };
 
